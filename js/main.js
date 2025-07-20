@@ -63,7 +63,7 @@ function startCounter(counter) {
             clearInterval(interval); // إيقاف العداد عند الوصول للرقم النهائي
         }
         // تنسيق الرقم باستخدام toLocaleString
-        counter.textContent = Math.floor(current).toLocaleString();
+        counter.textContent = '+' + Math.floor(current).toLocaleString();
     }, 16); // 16ms لكل إطار
 }
 
