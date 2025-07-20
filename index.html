@@ -133,15 +133,15 @@
         <div class="wave">
             <svg class="wave-svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
                 <path fill="var(--body-color)" d="
-                    M0,50 
-                    C150,20 
-                    300,0 
-                    720,50 
-                    C1140,100 
-                    1290,80 
-                    1440,50 
-                    L1440,100 
-                    L0,100 
+                    M0,50
+                    C150,20
+                    300,0
+                    720,50
+                    C1140,100
+                    1290,80
+                    1440,50
+                    L1440,100
+                    L0,100
                     Z">
                     <animate attributeName="d" dur="5s" repeatCount="indefinite" values="
                             M0,50 C150,20 300,0 720,50 C1140,100 1290,80 1440,50 L1440,100 L0,100 Z;
@@ -660,35 +660,62 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-12 mt-sm-3">
-                    <form action="#">
+                    <form id="contact-form" method="POST" action="https://formsubmit.co/thenine691@gmail.com">
+                        <input type="hidden" name="_captcha" value="false">
+                        <!-- رسائل النجاح -->
+                        <div id="success-alert" class="alert alert-success d-none mt-4" role="alert">
+                            تم الإرسال بنجاح، شكرًا لتواصلك معنا!
+                        </div>
+
+                        <!-- الاسم الكامل -->
                         <div class="d-flex justify-content-between w-100">
                             <div class="form-floating mb-3 w-100 ms-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="الاسم الاول ">
-                                <label for="floatingInput">الاسم الاول : </label>
+                                <input type="text" class="form-control" name="first_name" id="first_name"
+                                    placeholder="الاسم الاول" required>
+                                <label for="first_name">الاسم الاول :</label>
                             </div>
                             <div class="form-floating mb-3 w-100">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="الاسم الاخير">
-                                <label for="floatingInput">الاسم الاخير :</label>
+                                <input type="text" class="form-control" name="last_name" id="last_name"
+                                    placeholder="الاسم الاخير" required>
+                                <label for="last_name">الاسم الاخير :</label>
                             </div>
                         </div>
+
+                        <!-- رقم الهاتف -->
                         <div class="form-floating mb-3 w-100 ms-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="example@gmail.com">
-                            <label for="floatingInput">رقم الهاتف : </label>
+                            <input type="text" class="form-control" name="رقم_الهاتف" id="phone"
+                                placeholder="رقم الهاتف" required>
+                            <label for="phone">رقم الهاتف :</label>
                         </div>
+
+                        <!-- البريد الإلكتروني -->
                         <div class="form-floating mb-3 w-100 ms-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="example@gmail.com">
-                            <label for="floatingInput">البريد الالكتروني : </label>
+                            <input type="email" class="form-control" name="البريد_الإلكتروني" id="email"
+                                placeholder="example@gmail.com" required>
+                            <label for="email">البريد الالكتروني :</label>
                         </div>
+
+                        <!-- الملاحظات / الرسالة -->
                         <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                style="height: 200px"></textarea>
-                            <label for="floatingTextarea2">ملاحظات</label>
+                            <textarea class="form-control" name="الرسالة" id="notes" placeholder="ملاحظات"
+                                style="height: 200px" required></textarea>
+                            <label for="notes">ملاحظات</label>
                         </div>
+
+                        <!-- زر الإرسال -->
                         <div class="btnDiv pt-5">
-                            <a href="#" class="btn py-3 px-4 fw-bold hvr-underline-from-right">
-                                <span>ارسال</span></a>
+                            <button type="submit" class="btn py-3 px-4 fw-bold hvr-underline-from-right">
+                                <span>ارسال</span>
+                            </button>
                         </div>
+
+                        <!-- إخفاء reCAPTCHA / إلغاء spam -->
+                        <input type="hidden" name="_captcha" value="false">
+
+                        <!-- إعادة التوجيه بعد الإرسال (اختياري) -->
+                        <!-- <input type="hidden" name="_next" value="https://yourdomain.com/thanks.html"> -->
                     </form>
+
                 </div>
 
             </div>
