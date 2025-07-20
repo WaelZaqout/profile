@@ -49,6 +49,7 @@ nav .up-nav .btn:hover {
 }
 
 /* nav-down */
+
 nav .nav-down {
     background-color: var(--body-color);
     border-radius: var(--border-radius);
@@ -57,6 +58,7 @@ nav .nav-down {
     top: 0;
     left: 0;
     z-index: 1000;
+    display: none;
 }
 
 .nav-down ul {

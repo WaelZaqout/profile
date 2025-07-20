@@ -1,5 +1,32 @@
 /*  sm  */
-@media (max-width:991px) {}
+@media (max-width:991px) {
+
+    .swiper-button-next {
+        right: 70% !important;
+    }
+
+    .swiper-button-prev {
+        right: 84% !important;
+    }
+
+    .accordion-button {
+        text-align: right !important;
+    }
+
+    footer {
+        text-align: center !important;
+    }
+
+    footer .icons-group {
+        margin: auto;
+    }
+
+    footer .div-input-icon {
+        /* margin: auto 0; */
+    }
+}
+
+
 
 /*  mid */
 @media(min-width:992px) and (max-width: 1199px) {}
@@ -10,6 +37,18 @@
 
 
 @media (min-width: 1400px) {
+
+    nav .nav-down {
+        display: block;
+    }
+
+    /* 
+    header
+    */
+    .header-text {
+        width: 70%;
+        margin-left: auto !important;
+    }
 
     .container,
     .container-lg,
