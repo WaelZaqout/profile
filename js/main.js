@@ -107,32 +107,29 @@ const swiper = new Swiper('.swiper-section-1', {
     }
 });
 
-document.getElementById('contact-form').addEventListener('submit', function (e) {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+        e.preventDefault();
 
-    const form = e.target;
-    const formData = new FormData(form);
+        const form = e.target;
+        const formData = new FormData(form);
 
-    fetch(form.action, {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => {
-            if (response.ok) {
-                // إظهار الرسالة
-                const alert = document.getElementById('success-alert');
-                alert.classList.remove('d-none');
-
-                // تفريغ النموذج
-                form.reset();
-
-                // إخفاء الرسالة بعد 5 ثواني
-                setTimeout(() => alert.classList.add('d-none'), 5000);
-            } else {
-                alert('حدث خطأ أثناء الإرسال.');
-            }
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
         })
-        .catch(error => {
-            alert('فشل الإرسال: ' + error.message);
-        });
+            .then(response => {
+                if (response.ok) {
+                    const alert = document.getElementById('success-alert');
+                    alert.classList.remove('d-none');
+                    form.reset();
+                    setTimeout(() => alert.classList.add('d-none'), 5000);
+                } else {
+                    alert('حدث خطأ أثناء الإرسال.');
+                }
+            })
+            .catch(error => {
+                alert('فشل الإرسال: ' + error.message);
+            });
+    });
 });
