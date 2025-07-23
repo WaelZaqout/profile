@@ -209,18 +209,19 @@ header .wave .wave-svg {
 }
 
 .service-icon {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     margin: 0 auto 1.5rem;
     background: #f0f4ff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
-    color: #007bff;
+    font-size: 1rem; /* كان 1.8rem */
+    color: var(--main-color);
     box-shadow: inset 0 0 10px rgba(0, 123, 255, 0.1);
 }
+
 
 .service-card h3 {
     font-size: 1.25rem;
@@ -356,15 +357,21 @@ header .wave .wave-svg {
 
 .section-1 .swiper-button-prev,
 .section-1 .swiper-button-next {
-    background: linear-gradient(45deg, var(--main-color), var(--sub-color));
-    border: none;
+    background: var(--border-radius);
+    border: 2px solid var(--main-color);
     border-radius: 50%;
     padding: 15px;
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     margin-top: -25px;
+    color: white; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px; 
 }
+
 
 .section-1 .swiper-button-prev {
     top: 25px;
@@ -380,12 +387,13 @@ header .wave .wave-svg {
 .section-1 .swiper-button-next::after {
     font-size: 20px;
     font-weight: bold;
-    color: white;
+    color:var(--main-color);
 }
 
 .border-red {
-    border: 3px solid var(--main-color);
-    border-radius: var(--border-radius);
+    border-color: transparent !important;
+    /* أو يمكنك حذف البوردر نهائياً */
+    /* border: none !important; */
 }
 
 /* section 2 */
