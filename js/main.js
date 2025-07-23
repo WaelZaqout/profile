@@ -1,129 +1,127 @@
-// scroll btn
-const scrollTopBtn = document.querySelector('.scroll-top'); // الحصول على الزر
+// ========================= Scroll to Top Button =========================
+const scrollTopBtn = document.querySelector('.scroll-top');
 
-// إظهار الزر بشكل سلس عند التمرير للأسفل
 window.onscroll = () => {
-    if (window.scrollY > 200) { // إذا تجاوز التمرير 200 بيكسل
-        scrollTopBtn.classList.add('show'); // إضافة الكلاس لإظهار الزر
+    if (window.scrollY > 200) {
+        scrollTopBtn.classList.add('show');
     } else {
-        scrollTopBtn.classList.remove('show'); // إزالة الكلاس لإخفاء الزر
+        scrollTopBtn.classList.remove('show');
     }
 };
 
-// إرجاع الصفحة إلى الأعلى عند الضغط على الزر
 scrollTopBtn.onclick = () => {
-    window.scrollTo({
-        top: 0, // العودة إلى أعلى الصفحة
-        behavior: 'smooth' // تمرير سلس
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-
-
-window.addEventListener("load", function () {
+// ========================= Page Loader =========================
+window.addEventListener("load", () => {
     const loader = document.getElementById("loader");
-    loader.classList.add("hidden"); // إضافة كلاس الإخفاء
+    if (loader) loader.classList.add("hidden");
 });
 
-
-
-
-// كود العداد
-document.addEventListener("DOMContentLoaded", function () {
-    // تحديد جميع العناصر التي نريد تشغيل العداد فيها
+// ========================= Counter on Scroll =========================
+document.addEventListener("DOMContentLoaded", () => {
     const counters = document.querySelectorAll(".cont");
 
-    // إعداد Intersection Observer
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const counter = entry.target;
-                startCounter(counter);
-                observer.unobserve(counter); // إلغاء المراقبة بعد التشغيل
+                startCounter(entry.target);
+                observer.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.5 // 50% من العنصر يجب أن يكون مرئيًا لتشغيل العداد
-    });
+    }, { threshold: 0.5 });
 
     counters.forEach(counter => observer.observe(counter));
 });
 
-// وظيفة تشغيل العداد
 function startCounter(counter) {
-    const target = +counter.getAttribute("data-target"); // الرقم النهائي
-    const duration = 2000; // المدة الزمنية للعد (2 ثوانٍ)
-    const increment = target / duration * 16; // مقدار الزيادة في كل إطار (16ms للإطار الواحد)
-
+    const target = +counter.getAttribute("data-target");
+    const duration = 2000;
+    const increment = target / duration * 16;
     let current = 0;
+
     const interval = setInterval(() => {
         current += increment;
         if (current >= target) {
             current = target;
-            clearInterval(interval); // إيقاف العداد عند الوصول للرقم النهائي
+            clearInterval(interval);
         }
-        // تنسيق الرقم باستخدام toLocaleString
         counter.textContent = '+' + Math.floor(current).toLocaleString();
-    }, 16); // 16ms لكل إطار
+    }, 16);
 }
 
-// swiper code
-const swiper = new Swiper('.swiper-section-1', {
-    // Optional parameters
-    loop: true,
-    spaceBetween: 20,
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-    },
+// ========================= Swiper Initialization =========================
+function initSwiper(selector, options) {
+    return new Swiper(selector, options);
+}
 
-    // If we need pagination
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-    },
+document.addEventListener("DOMContentLoaded", () => {
+    initSwiper('.swiper-section-1', {
+        loop: true,
+        spaceBetween: 30,
+        autoplay: { delay: 5000, disableOnInteraction: false },
+        pagination: { el: '.swiper-pagination', clickable: true, dynamicBullets: true },
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        rtl: true,
+        breakpoints: {
+            0: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 }
+        }
+    });
 
-    // Navigation arrows
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
+    initSwiper('.swiper-our-work', {
+        loop: true,
+        spaceBetween: 30,
+        autoplay: { delay: 5000, disableOnInteraction: false },
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+    });
 
-    // Enable RTL
-    rtl: true, // إجبار الاتجاه على RTL
-
-    // Responsive breakpoints
-    breakpoints: {
-        0: {
-            slidesPerView: 1,
+    // const colors = ['#e3f2fd', '#f1f8ff', '#ede7f6', '#fce4ec', '#f3f9fb'];
+    initSwiper('.portfolio-swiper', {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: { delay: 2000, disableOnInteraction: false },
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        breakpoints: {
+            0: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            992: { slidesPerView: 3 }
         },
-        768: {
-            slidesPerView: 2,
-        },
-        1024: {
-            slidesPerView: 3,
-        },
-    }
+        on: {
+            init() {
+                const section = document.getElementById('portfolio');
+                // section.style.backgroundColor = colors[this.realIndex % colors.length];
+            },
+            slideChange() {
+                const section = document.getElementById('portfolio');
+                section.style.transition = 'background-color 0.6s ease';
+                // section.style.backgroundColor = colors[this.realIndex % colors.length];
+            }
+        }
+    });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('contact-form').addEventListener('submit', function (e) {
+// ========================= Contact Form =========================
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
-
-        const form = e.target;
         const formData = new FormData(form);
-
         fetch(form.action, {
             method: 'POST',
             body: formData
         })
             .then(response => {
+                const alert = document.getElementById('success-alert');
                 if (response.ok) {
-                    const alert = document.getElementById('success-alert');
-                    alert.classList.remove('d-none');
+                    alert?.classList.remove('d-none');
                     form.reset();
-                    setTimeout(() => alert.classList.add('d-none'), 5000);
+                    setTimeout(() => alert?.classList.add('d-none'), 5000);
                 } else {
                     alert('حدث خطأ أثناء الإرسال.');
                 }
@@ -133,3 +131,112 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
+
+// ========================= Mobile Menu =========================
+document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById('mobileMenuBtn'); // كان menuToggle
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenuBtn'); // كان closeMenu
+    const menuOverlay = document.getElementById('menuOverlay');
+    let isMenuOpen = false;
+
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            isMenuOpen = !isMenuOpen;
+            document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+        });
+    }
+
+    if (closeMenu) {
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            isMenuOpen = false;
+            document.body.style.overflow = '';
+        });
+    }
+
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            isMenuOpen = false;
+            document.body.style.overflow = '';
+        });
+    }
+});
+
+// ========================= Scroll Effects & Active Links =========================
+window.addEventListener("scroll", () => {
+    const navbar = document.getElementById("navbar");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const scrollTop = window.scrollY;
+
+    if (navbar) {
+        if (scrollTop > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }
+
+    const sections = document.querySelectorAll("section[id]");
+    const scrollPos = scrollTop + 100;
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute("id");
+
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            document.querySelectorAll(".nav-down a, .mobile-link").forEach(link => {
+                link.classList.remove("active");
+            });
+            const activeLink = document.querySelector(`.nav-down a[href="#${sectionId}"]`);
+            const activeMobileLink = document.querySelector(`.mobile-link[href="#${sectionId}"]`);
+            activeLink?.classList.add("active");
+            activeMobileLink?.classList.add("active");
+        }
+    });
+});
+
+// ========================= Scroll Indicator & Hero Animation =========================
+document.addEventListener("DOMContentLoaded", () => {
+    const scrollIndicator = document.getElementById('scrollIndicator');
+    scrollIndicator?.addEventListener('click', () => {
+        window.scrollBy({ top: window.innerHeight - 200, behavior: 'smooth' });
+    });
+
+    const heroElements = document.querySelectorAll('.hero-title, .hero-description, .btn');
+    const animateOnScroll = () => {
+        heroElements.forEach(el => {
+            const pos = el.getBoundingClientRect().top;
+            if (pos < window.innerHeight - 100) {
+                el.classList.add('animate__animated');
+                if (el.classList.contains('hero-title')) el.classList.add('animate__fadeInDown');
+                else if (el.classList.contains('hero-description')) el.classList.add('animate__fadeInUp');
+                else if (el.classList.contains('btn-primary')) el.classList.add('animate__fadeInLeft');
+                else if (el.classList.contains('btn-secondary')) el.classList.add('animate__fadeInRight');
+            }
+        });
+    };
+
+    window.addEventListener("load", animateOnScroll);
+    window.addEventListener("scroll", animateOnScroll);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    // تفعيل active عند الضغط على روابط القائمة الجانبية
+    const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+});
+// كود تفعيل العنصر النشط في قائمة التنقل
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function() {
+      document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });

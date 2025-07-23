@@ -49,6 +49,10 @@ nav .up-nav .btn:hover {
 }
 
 /* nav-down */
+nav {
+    width: 100%;
+}
+
 
 nav .nav-down {
     background-color: var(--body-color);
@@ -58,7 +62,15 @@ nav .nav-down {
     top: 0;
     left: 0;
     z-index: 1000;
-    display: none;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    /* لعرض العناصر أفقياً */
+    justify-content: center;
+    /* أو space-between */
+    align-items: center;
 }
 
 .nav-down ul {
@@ -133,10 +145,122 @@ header .wave .wave-svg {
     height: 100px;
 }
 
+/* service */
+.services {
+    padding: 5rem 0;
+    /* تم تقليل padding ليشبه قسم portfolio */
+    background: #fff;
+    /* إزالة التدرج ليتناسق مع portfolio */
+    position: relative;
+}
+
+.container {
+    max-width: 1200px;
+    /* توحيد العرض مع قسم portfolio */
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: #007bff;
+    /* لون قريب من لون الأسهم في قسم portfolio */
+    border-radius: 2px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    /* توحيد الفجوة مثل swiper-spacing */
+    margin-top: 3rem;
+}
+
+.service-card {
+    background: #fff;
+    padding: 2rem;
+    border: 2px solid #eee;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    position: relative;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: #f0f4ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: #007bff;
+    box-shadow: inset 0 0 10px rgba(0, 123, 255, 0.1);
+}
+
+.service-card h3 {
+    font-size: 1.25rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
 /* section 1 */
+.section-1 {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    margin: 20px 0;
+}
+
+.section-1 .head-section h3 {
+    color: var(--main-color);
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .section-1 .div-content {
-    box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.section-1 .div-content:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .section-1 .div-content:hover .div-text {
@@ -149,7 +273,35 @@ header .wave .wave-svg {
 }
 
 .section-1 img {
-    height: 450px;
+    height: 300px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.section-1 .div-content:hover img {
+    transform: scale(1.1);
+}
+
+.section-1 .div-img {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 280px;
+    /* زيادة ارتفاع الكارت */
+}
+
+.section-1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: var(--transition);
+    border-radius: inherit;
+    min-height: 280px;
+    max-height: 320px;
 }
 
 .section-1 .div-img::after {
@@ -157,11 +309,11 @@ header .wave .wave-svg {
     top: 0;
     left: 0;
     content: "";
-    background-color: black;
+    background: linear-gradient(45deg, var(--main-color), var(--sub-color));
     opacity: 0;
-    border-radius: var(--border-radius);
     width: 100%;
     height: 100%;
+    transition: var(--transition);
 }
 
 .section-1 .div-text {
@@ -171,24 +323,26 @@ header .wave .wave-svg {
     left: 0;
     width: 100%;
     height: fit-content;
-    background-color: var(--body-color);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     border-radius: 0 0 var(--border-radius) var(--border-radius);
     transition: var(--transition);
 }
 
 .section-1 .div-icon {
     z-index: 4;
+    position: relative;
 }
 
 .section-1 .div-icon i {
     font-size: 18px;
     transform: translateY(5px) translateX(15px);
     color: var(--body-color);
-
+    transition: var(--transition);
 }
 
 .section-1 .div-icon::after {
-    background-color: var(--sub-color);
+    background: linear-gradient(45deg, var(--main-color), var(--sub-color));
     width: 500%;
     position: absolute;
     top: -20px;
@@ -197,16 +351,19 @@ header .wave .wave-svg {
     height: 200%;
     z-index: -1;
     content: "";
+    transition: var(--transition);
 }
 
 .section-1 .swiper-button-prev,
 .section-1 .swiper-button-next {
-    border: 3px solid var(--main-color);
+    background: linear-gradient(45deg, var(--main-color), var(--sub-color));
+    border: none;
     border-radius: 50%;
     padding: 15px;
     position: absolute;
-    transform: rotate(180deg);
-
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
 }
 
 .section-1 .swiper-button-prev {
@@ -223,6 +380,12 @@ header .wave .wave-svg {
 .section-1 .swiper-button-next::after {
     font-size: 20px;
     font-weight: bold;
+    color: white;
+}
+
+.border-red {
+    border: 3px solid var(--main-color);
+    border-radius: var(--border-radius);
 }
 
 /* section 2 */
@@ -506,3 +669,4 @@ footer .icons-group .hvr-bounce-to-bottom:before {
 }
 
 /* end footer */
+

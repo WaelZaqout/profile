@@ -33,6 +33,541 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/midia.css">
+    <style>
+        .btn {
+            color: var(--body-color);
+            background-color: var(--main-color);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .btn::before {
+            border-radius: var(--border-radius);
+            background-color: var(--sub-color);
+        }
+
+        /* Header Styles */
+        header {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(32, 201, 151, 0.85), rgba(8, 126, 225, 0.7)),
+                url("img/undraw_hello_1nh3-removebg-preview.png") no-repeat center center / cover;
+
+            color: white;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* لجعل المحتوى يتوسط عموديًا */
+            align-items: center;
+            /* لجعل المحتوى يتوسط أفقيًا */
+        }
+
+
+        /* Floating Animation */
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Navbar Styles */
+        nav {
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.733);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+
+
+        .logo {
+            height: 70px;
+            transition: var(--transition);
+        }
+
+        .logo img {
+            height: 100%;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--main-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a i {
+            margin-left: 5px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--sub-color);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--sub-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--main-color);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100vh;
+            background-color: var(--main-color);
+            z-index: 1100;
+            transition: var(--transition);
+            padding: 20px;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+        .mobile-menu.active {
+            left: 0;
+            /* ← تظهر من اليسار */
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .close-menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 20px;
+        }
+
+        .mobile-nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-links a i {
+            margin-left: 10px;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--sub-color);
+            transform: translateX(-10px);
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hero Section */
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 150px 10% 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title span {
+            color: var(--sub-color);
+            position: relative;
+        }
+
+        .hero-title span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--sub-color);
+            transform-origin: right;
+            animation: underlineGrow 1.5s ease-out forwards;
+        }
+
+        @keyframes underlineGrow {
+            0% {
+                transform: scaleX(0);
+            }
+
+            100% {
+                transform: scaleX(1);
+            }
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            padding-top: 40px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background-color: var(--main-color);
+            color: white;
+            border: 2px solid var(--main-color);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--main-color);
+        }
+
+        .btn-secondary {
+             background-color: var(--main-color);
+            color: white;
+            border: 2px solid var(--main-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: transparent;
+            color: var(--main-color);
+        }
+
+        .btn i {
+            margin-left: 8px;
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: floating 8s infinite ease-in-out;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            background-color: var(--sub-color);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            background-color: white;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 70px;
+            height: 70px;
+            background-color: var(--sub-color);
+            top: 75%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        /* Wave Animation */
+        .wave-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .wave-svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 100px;
+        }
+
+        .wave-path {
+            fill: var(--body-color);
+            animation: waveAnimation 8s linear infinite;
+        }
+
+        @keyframes waveAnimation {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+            }
+
+            .nav-links li {
+                margin-left: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                padding: 120px 5% 80px;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .scroll-text {
+            margin-bottom: 10px;
+            font-size: 14px;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .scroll-indicator:hover .scroll-text {
+            opacity: 1;
+        }
+
+        .mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .mouse-wheel {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background-color: white;
+            border-radius: 2px;
+            animation: wheelAnimation 2s infinite;
+        }
+
+        @keyframes wheelAnimation {
+            0% {
+                top: 10px;
+                opacity: 1;
+            }
+
+            50% {
+                top: 15px;
+                opacity: 0.8;
+            }
+
+            100% {
+                top: 10px;
+                opacity: 1;
+            }
+        }
+
+        /* end nav */
+        header {
+            min-height: 600px;
+        }
+
+        header::after {
+            background-image: url(../img/s-1.jpg);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            content: "";
+            z-index: -1;
+        }
+
+        header .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--main-color);
+        }
+
+        header .wave .wave-svg {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -48,63 +583,48 @@
     </div>
     <button class="scroll-top" id="scrollTop">↑</button>
     <!-- start header  -->
-    <header class="position-relative">
+    <header class="position-relative" id="home">
         <!-- start nav  -->
-        <nav class="container">
-            <div class="up-nav d-flex justify-content-between align-items-center">
-                <div class="div-img">
-                    <a href="#">
-                        <img src="img/sh_logo.png" alt="logo" title="logo" width="250px" height="70px">
-                    </a>
-                </div>
-                <div class="div-btn">
-                    <a href="#" class="btn btn-up-nav hvr-underline-from-right py-3 px-4">
-                        <i class="fa-solid fa-arrow-left ms-1"></i> تسجيل دخول
-                    </a>
-                </div>
-            </div>
-            <div class="nav-down mt-2">
-                <ul class="d-flex justify-content-around align-items-center">
-                    <li>
-                        <a href="#" class="active">
-                            <i class="fa-solid fa-house"></i>
-                            الرئسية
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#services">
-                            <i class="fa-solid fa-chalkboard-user"></i>
-                            خدماتنا
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#about-us">
-                            <i class="fa-solid fa-user"></i>
-                            من نحن
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#features">
-                            <i class="fa-solid fa-medal"></i>
-                            مميزات البرنامج
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#questions">
-                            <i class="fa-brands fa-quinscape"></i>
-                            الاسئلة الشائعة
+        <nav id="navbar">
+            <a href="#" class="logo">
+                <img src="img/Main.PNG" alt="شعار الشركة - حلول برمجية مبتكرة بألوان زرقاء وبيضاء">
+            </a>
 
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#contact-us">
-                            <i class="fa-solid fa-phone-volume"></i>
-                            التواصل
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="#services"><i class="fas fa-laptop-code"></i> خدماتنا</a></li>
+                <li><a href="#about-us"><i class="fas fa-users"></i> من نحن</a></li>
+                <li><a href="#features"><i class="fas fa-star"></i> مميزاتنا</a></li>
+                <li><a href="#questions"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a></li>
+                <li><a href="#contact-us"><i class="fas fa-phone-alt"></i> اتصل بنا</a></li>
+            </ul>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <a href="#" class="logo">
+                    <img src="img/Main.PNG" alt="شعار الشركة للجوّال - نسخة مصغرة من الشعار الرئيسي">
+                </a>
+                <button class="close-menu-btn" id="closeMenuBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <ul class="mobile-nav-links">
+                <li><a href="#home" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="#services"><i class="fas fa-laptop-code"></i> خدماتنا</a></li>
+                <li><a href="#about-us"><i class="fas fa-users"></i> من نحن</a></li>
+                <li><a href="#features"><i class="fas fa-star"></i> مميزاتنا</a></li>
+                <li><a href="#questions"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a></li>
+                <li><a href="#contact-us"><i class="fas fa-phone-alt"></i> اتصل بنا</a></li>
+            </ul>
+        </div>
+
         <!-- end nav  -->
         <div class="container mt-5">
             <div class="div-content mt-5">
@@ -123,6 +643,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="cta-buttons">
+            <a href="#contact-us" class="btn btn-primary animate__animated animate__fadeInLeft animate__delay-2s">
+                <i class="fas fa-paper-plane"></i> ابدأ مشروعك
+            </a>
+            <a href="#services" class="btn btn-secondary animate__animated animate__fadeInRight animate__delay-2s">
+                <i class="fas fa-list"></i> خدماتنا
+            </a>
         </div>
         <div class="wave">
             <svg class="wave-svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
@@ -146,115 +674,192 @@
         </div>
     </header>
     <!-- end header -->
-    <!-- start section 1 services -->
-    <section class="section-1 py-5" id="services">
-        <div class="container overflow-hidden position-relative">
-            <div class="head-section w-100 text-end">
-                <h3 class="fw-bold main-color position-relative">
-                    خدماتنا
-                </h3>
+    <section class="services py-5 position-relative" id="services">
+        <div class="container position-relative">
+            <div class="head-section w-100 text-center">
+                <h3 class="section-title position-relative fade-in fw-bold">خدماتنا المميزة</h3>
             </div>
+
             <div class="row justify-content-center align-items-center mt-5">
-                <div class="swiper-section-1">
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        <!-- Slides -->
-                        <div class="swiper-slide">
-                            <div class="col-md-12 col-sm-12 mt-5">
-                                <a href="#">
-                                    <div class="div-content position-relative border-red">
-                                        <div class="div-img">
-                                            <img src="img/ser-1.jpeg" class="border-red" alt="services" width="100%"
-                                                height="100%">
-                                        </div>
-                                        <div class="div-text p-3 overflow-hidden d-flex justify-content-between">
-                                            <h4 class="fw-bold body-color-text">
-                                                إدارة المخزون الذكي
-                                            </h4>
-                                            <div class="div-icon position-relative">
-                                                <i class="fa-solid fa-right-long"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="col-md-12 col-sm-12 mt-5">
-                                <a href="#">
-                                    <div class="div-content position-relative border-red">
-                                        <div class="div-img">
-                                            <img src="img/ser-2.jpeg" class="border-red" alt="services" width="100%"
-                                                height="100%">
-                                        </div>
-                                        <div class="div-text p-3 overflow-hidden d-flex justify-content-between">
-                                            <h4 class="fw-bold body-color-text">
-                                                الفواتير والمحاسبة </h4>
-                                            <div class="div-icon position-relative">
-                                                <i class="fa-solid fa-right-long"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="col-md-12 col-sm-12 mt-5">
-                                <a href="#">
-                                    <div class="div-content position-relative border-red">
-                                        <div class="div-img">
-                                            <img src="img/ser-3.jpeg" class="border-red" alt="services" width="100%"
-                                                height="100%">
-                                        </div>
-                                        <div class="div-text p-3 overflow-hidden d-flex justify-content-between">
-                                            <h4 class="fw-bold body-color-text">
-                                                التقارير والتحليلات
-                                            </h4>
-                                            <div class="div-icon position-relative">
-                                                <i class="fa-solid fa-right-long"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="col-md-12 col-sm-12 mt-5">
-                                <a href="#">
-                                    <div class="div-content position-relative border-red">
-                                        <div class="div-img">
-                                            <img src="img/ser-4.jpeg" class="border-red" alt="services" width="100%"
-                                                height="100%">
-                                        </div>
-                                        <div class="div-text p-3 overflow-hidden d-flex justify-content-between">
-                                            <h4 class="fw-bold body-color-text">
-                                                الخدمة 1
-                                            </h4>
-                                            <div class="div-icon position-relative">
-                                                <i class="fa-solid fa-right-long"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
+                <div class="col-12">
+                    <div class="row gy-4 gx-4">
+                        <!-- الخدمة 1 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="service-card p-4 border h-100 text-center">
+                                <div class="service-icon mb-3">
+                                    <i class="fas fa-laptop-code fa-2x"></i>
+                                </div>
+                                <h4 class="fw-bold mb-2">تطوير المواقع الإلكترونية</h4>
+                                <p class="mb-0">نصمم ونطور مواقع إلكترونية عصرية وسريعة باستخدام أحدث التقنيات والمعايير
+                                    العالمية لضمان تجربة مستخدم استثنائية.</p>
                             </div>
                         </div>
 
+                        <!-- الخدمة 2 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="service-card p-4 border h-100 text-center">
+                                <div class="service-icon mb-3">
+                                    <i class="fas fa-mobile-alt fa-2x"></i>
+                                </div>
+                                <h4 class="fw-bold mb-2">تطبيقات الهواتف الذكية</h4>
+                                <p class="mb-0">نقوم بتطوير تطبيقات الهواتف الذكية لأنظمة iOS و Android بأعلى معايير
+                                    الجودة والأداء لتلبية احتياجات عملك.</p>
+                            </div>
+                        </div>
+
+                        <!-- الخدمة 3 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="service-card p-4 border h-100 text-center">
+                                <div class="service-icon mb-3">
+                                    <i class="fas fa-chart-line fa-2x"></i>
+                                </div>
+                                <h4 class="fw-bold mb-2">التسويق الرقمي</h4>
+                                <p class="mb-0">نوفر استراتيجيات تسويق رقمي شاملة لزيادة ظهور علامتك التجارية وتحقيق نمو
+                                    مستدام في السوق الرقمي.</p>
+                            </div>
+                        </div>
+
+                        <!-- الخدمة 4 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="service-card p-4 border h-100 text-center">
+                                <div class="service-icon mb-3">
+                                    <i class="fas fa-cloud fa-2x"></i>
+                                </div>
+                                <h4 class="fw-bold mb-2">الحلول السحابية</h4>
+                                <p class="mb-0">نقدم حلول سحابية متطورة وآمنة لإدارة بياناتك وتطبيقاتك بكفاءة عالية
+                                    ومرونة كاملة.</p>
+                            </div>
+                        </div>
+
+                        <!-- الخدمة 5 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="service-card p-4 border h-100 text-center">
+                                <div class="service-icon mb-3">
+                                    <i class="fas fa-shield-alt fa-2x"></i>
+                                </div>
+                                <h4 class="fw-bold mb-2">الأمن السيبراني</h4>
+                                <p class="mb-0">نوفر حلول أمنية متقدمة لحماية أنظمتك وبياناتك من التهديدات السيبرانية
+                                    والحفاظ على سرية معلوماتك.</p>
+                            </div>
+                        </div>
+
+                        <!-- الخدمة 6 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="service-card p-4 border h-100 text-center">
+                                <div class="service-icon mb-3">
+                                    <i class="fas fa-cogs fa-2x"></i>
+                                </div>
+                                <h4 class="fw-bold mb-2">الاستشارات التقنية</h4>
+                                <p class="mb-0">نقدم استشارات تقنية متخصصة لمساعدة الشركات على اختيار وتطبيق أفضل الحلول
+                                    التكنولوجية لأعمالها.</p>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-
                 </div>
-
-
             </div>
         </div>
+    </section>
 
+    <!-- start section 1 services -->
+    <section class="section-1 py-5 position-relative" id="portfolio">
+        <div class="container position-relative">
+            <div class="head-section w-100 text-center ">
+                <h3 class="fw-bold position-relative fade-in">
+                    اعمالنا الاحترافية
+                </h3>
+                
+            </div>
+              <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+
+            <div class="row justify-content-center align-items-center mt-5">
+                <div class="swiper portfolio-swiper">
+                    <div class="swiper-wrapper">
+                        <!-- خدمة إدارة المخزون الذكي -->
+                        <div class="swiper-slide">
+                            <div class="col-12 mt-5">
+                                <div class="div-content position-relative border-red" data-service="inventory"
+                                    data-bs-toggle="modal" data-bs-target="#serviceModal">
+                                    <div class="div-img">
+                                        <img src="img/ser-1.jpeg" class="border-red" alt="إدارة المخزون الذكي">
+                                    </div>
+                                    <div class="div-text p-3 overflow-hidden d-flex justify-content-between">
+                                        <h4 class="fw-bold body-color-text">
+                                            إدارة المخزون الذكي
+                                        </h4>
+                                        <div class="div-icon position-relative">
+                                            <i class="fa-solid fa-arrow-left"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- خدمة الفواتير والمحاسبة -->
+                        <div class="swiper-slide">
+                            <div class="col-12 mt-5">
+                                <div class="div-content position-relative border-red" data-service="accounting"
+                                    data-bs-toggle="modal" data-bs-target="#serviceModal">
+                                    <div class="div-img">
+                                        <img src="img/ser-2.jpeg" class="border-red" alt="الفواتير والمحاسبة">
+                                    </div>
+                                    <div class="div-text p-3 overflow-hidden d-flex justify-content-between">
+                                        <h4 class="fw-bold body-color-text">
+                                            الفواتير والمحاسبة
+                                        </h4>
+                                        <div class="div-icon position-relative">
+                                            <i class="fa-solid fa-arrow-left"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- خدمة التقارير والتحليلات -->
+                        <div class="swiper-slide">
+                            <div class="col-12 mt-5">
+                                <div class="div-content position-relative border-red" data-service="reports"
+                                    data-bs-toggle="modal" data-bs-target="#serviceModal">
+                                    <div class="div-img">
+                                        <img src="img/ser-3.jpeg" class="border-red" alt="التقارير والتحليلات">
+                                    </div>
+                                    <div class="div-text p-3 overflow-hidden d-flex justify-content-between">
+                                        <h4 class="fw-bold body-color-text">
+                                            التقارير والتحليلات
+                                        </h4>
+                                        <div class="div-icon position-relative">
+                                            <i class="fa-solid fa-arrow-left"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- الخدمة المخصصة -->
+                        <div class="swiper-slide">
+                            <div class="col-12 mt-5">
+                                <div class="div-content position-relative border-red" data-service="custom"
+                                    data-bs-toggle="modal" data-bs-target="#serviceModal">
+                                    <div class="div-img">
+                                        <img src="img/ser-4.jpeg" class="border-red" alt="الحلول المخصصة">
+                                    </div>
+                                    <div class="div-text p-3 overflow-hidden d-flex justify-content-between">
+                                        <h4 class="fw-bold body-color-text">
+                                            الحلول المخصصة
+                                        </h4>
+                                        <div class="div-icon position-relative">
+                                            <i class="fa-solid fa-arrow-left"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
     </section>
     <!-- end section 1 services -->
     <!-- start section 2 about -->
@@ -839,7 +1444,7 @@
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-    </script>
+        </script>
 
     <!-- swiper js -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
