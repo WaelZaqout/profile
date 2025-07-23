@@ -143,11 +143,21 @@ document.addEventListener("DOMContentLoaded", () => {
             isMenuOpen = !isMenuOpen;
             document.body.style.overflow = isMenuOpen ? 'hidden' : '';
 
-            // ✅ تحديد العنصر النشط بناءً على موضع الصفحة عند فتح القائمة
+            // ✅ عند فتح القائمة: إذا كان المستخدم في أعلى الصفحة، فعّل فقط رابط الرئيسية
             if (isMenuOpen) {
                 const scrollPos = window.scrollY + 150;
                 const sections = document.querySelectorAll('section[id]');
                 let currentSectionId = null;
+
+                if (window.scrollY < 50) {
+                    document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#home') {
+                            link.classList.add('active');
+                        }
+                    });
+                    return;
+                }
 
                 sections.forEach(section => {
                     const top = section.offsetTop;
@@ -199,6 +209,18 @@ window.addEventListener("scroll", () => {
 
     const sections = document.querySelectorAll("section[id]");
     const scrollPos = scrollTop + 100;
+
+    // ✅ إذا كان المستخدم في أعلى الصفحة، فعّل فقط رابط الرئيسية
+    if (scrollTop < 50) {
+        document.querySelectorAll(".nav-links a, .mobile-nav-links a").forEach(link => {
+            link.classList.remove("active");
+            if (link.getAttribute('href') === "#home") {
+                link.classList.add("active");
+            }
+        });
+        return;
+    }
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;

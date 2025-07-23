@@ -617,6 +617,19 @@ header .wave .wave-svg {
     background-color: var(--main-color);
 }
 
+/* === تصغير زر ابدأ مشروعك والزر المجاور في الهيرو === */
+header .cta-buttons .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    header .cta-buttons .btn {
+        padding: 8px 12px;
+        font-size: 0.95rem;
+    }
+}
+
 /* start footer */
 footer {
     /* background-color: #263238; */
@@ -677,4 +690,21 @@ footer .icons-group .hvr-bounce-to-bottom:before {
 }
 
 /* end footer */
+
+/* === تأثير hover جميل لزر الإرسال في نموذج التواصل (بدون أسود) === */
+.btnDiv .btn[type="submit"] {
+    background: linear-gradient(90deg, var(--main-color) 60%, #3db8ff 100%);
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 8px rgba(4, 118, 191, 0.08);
+    transition: all 0.3s cubic-bezier(.4,2,.3,1);
+}
+
+.btnDiv .btn[type="submit"]:hover, .btnDiv .btn[type="submit"]:focus {
+    background: linear-gradient(90deg, #3db8ff 0%, var(--main-color) 100%);
+    color: #fff;
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 8px 24px rgba(4, 118, 191, 0.18);
+    letter-spacing: 1px;
+}
 
