@@ -78,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
         navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
     });
 
-    // const colors = ['#e3f2fd', '#f1f8ff', '#ede7f6', '#fce4ec', '#f3f9fb'];
     initSwiper('.portfolio-swiper', {
         slidesPerView: 3,
         spaceBetween: 30,
@@ -93,12 +92,10 @@ document.addEventListener("DOMContentLoaded", () => {
         on: {
             init() {
                 const section = document.getElementById('portfolio');
-                // section.style.backgroundColor = colors[this.realIndex % colors.length];
             },
             slideChange() {
                 const section = document.getElementById('portfolio');
                 section.style.transition = 'background-color 0.6s ease';
-                // section.style.backgroundColor = colors[this.realIndex % colors.length];
             }
         }
     });
@@ -134,9 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ========================= Mobile Menu =========================
 document.addEventListener("DOMContentLoaded", () => {
-    const menuToggle = document.getElementById('mobileMenuBtn'); // كان menuToggle
+    const menuToggle = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
-    const closeMenu = document.getElementById('closeMenuBtn'); // كان closeMenu
+    const closeMenu = document.getElementById('closeMenuBtn');
     const menuOverlay = document.getElementById('menuOverlay');
     let isMenuOpen = false;
 
@@ -145,6 +142,28 @@ document.addEventListener("DOMContentLoaded", () => {
             mobileMenu.classList.toggle('active');
             isMenuOpen = !isMenuOpen;
             document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+
+            // ✅ تحديد العنصر النشط بناءً على موضع الصفحة عند فتح القائمة
+            if (isMenuOpen) {
+                const scrollPos = window.scrollY + 150;
+                const sections = document.querySelectorAll('section[id]');
+                let currentSectionId = null;
+
+                sections.forEach(section => {
+                    const top = section.offsetTop;
+                    const height = section.offsetHeight;
+                    if (scrollPos >= top && scrollPos < top + height) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+
+                document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+                    link.classList.remove('active');
+                    if (currentSectionId && link.getAttribute('href') === `#${currentSectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
         });
     }
 
@@ -168,7 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // ========================= Scroll Effects & Active Links =========================
 window.addEventListener("scroll", () => {
     const navbar = document.getElementById("navbar");
-    const mobileMenu = document.getElementById("mobileMenu");
     const scrollTop = window.scrollY;
 
     if (navbar) {
@@ -187,13 +205,13 @@ window.addEventListener("scroll", () => {
         const sectionId = section.getAttribute("id");
 
         if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-            document.querySelectorAll(".nav-down a, .mobile-link").forEach(link => {
+            document.querySelectorAll(".nav-links a, .mobile-nav-links a").forEach(link => {
                 link.classList.remove("active");
             });
-            const activeLink = document.querySelector(`.nav-down a[href="#${sectionId}"]`);
-            const activeMobileLink = document.querySelector(`.mobile-link[href="#${sectionId}"]`);
-            activeLink?.classList.add("active");
-            activeMobileLink?.classList.add("active");
+            const activeLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
+            if (activeLink) activeLink.classList.add("active");
+            const activeMobileLink = document.querySelector(`.mobile-nav-links a[href="#${sectionId}"]`);
+            if (activeMobileLink) activeMobileLink.classList.add("active");
         }
     });
 });
@@ -223,20 +241,26 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", animateOnScroll);
 });
 
+// ========================= Mobile Links Active Toggle =========================
 document.addEventListener("DOMContentLoaded", () => {
-    // تفعيل active عند الضغط على روابط القائمة الجانبية
     const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+    const mobileMenu = document.getElementById('mobileMenu');
     mobileLinks.forEach(link => {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function () {
             mobileLinks.forEach(l => l.classList.remove('active'));
             this.classList.add('active');
+            if (mobileMenu) {
+                mobileMenu.classList.remove('active');
+            }
+            document.body.style.overflow = '';
         });
     });
 });
-// كود تفعيل العنصر النشط في قائمة التنقل
+
+// ========================= Desktop Nav Active Toggle =========================
 document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', function() {
-      document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
-      this.classList.add('active');
+    link.addEventListener('click', function () {
+        document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
     });
-  });
+});

@@ -34,8 +34,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/midia.css">
     <style>
-      
-      
         /* Header Styles */
         header {
             position: relative;
@@ -209,6 +207,16 @@
             transform: translateX(-10px);
         }
 
+        .mobile-nav-links a.active {
+            background-color: white;
+            /* خلفية العنصر */
+            color: var(--main-color);
+            /* لون الخط — تأكد من تعريف --main-color مسبقًا */
+            font-weight: bold;
+            border-radius: 8px;
+            padding: 8px 12px;
+        }
+
         .menu-overlay {
             position: fixed;
             top: 0;
@@ -312,7 +320,7 @@
         }
 
         .btn-secondary {
-             background-color: var(--main-color);
+            background-color: var(--main-color);
             color: white;
             border: 2px solid var(--main-color);
         }
@@ -582,8 +590,8 @@
 
             <ul class="nav-links">
                 <li><a href="#home" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
-                <li><a href="#services"><i class="fas fa-laptop-code"></i> خدماتنا</a></li>
                 <li><a href="#about-us"><i class="fas fa-users"></i> من نحن</a></li>
+                <li><a href="#services"><i class="fas fa-laptop-code"></i> خدماتنا</a></li>
                 <li><a href="#features"><i class="fas fa-star"></i> مميزاتنا</a></li>
                 <li><a href="#questions"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a></li>
                 <li><a href="#contact-us"><i class="fas fa-phone-alt"></i> اتصل بنا</a></li>
@@ -607,8 +615,8 @@
 
             <ul class="mobile-nav-links">
                 <li><a href="#home" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
-                <li><a href="#services"><i class="fas fa-laptop-code"></i> خدماتنا</a></li>
                 <li><a href="#about-us"><i class="fas fa-users"></i> من نحن</a></li>
+                <li><a href="#services"><i class="fas fa-laptop-code"></i> خدماتنا</a></li>
                 <li><a href="#features"><i class="fas fa-star"></i> مميزاتنا</a></li>
                 <li><a href="#questions"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a></li>
                 <li><a href="#contact-us"><i class="fas fa-phone-alt"></i> اتصل بنا</a></li>
@@ -664,6 +672,78 @@
         </div>
     </header>
     <!-- end header -->
+    <!-- start section 2 about -->
+    <section class="section-2 py-5" id="about-us">
+        <div class="container  position-relative">
+            <div class="head-section w-100 text-end">
+                <h3 class="fw-bold main-color position-relative">
+                    من نحن – The Nine </h3>
+            </div>
+            <div class="row justify-content-center align-items-center mt-5">
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <div class="div-content">
+                        <div class="div-text">
+                            <h5>
+                                نحن في The Nine شركة متخصصة في تصميم وتطوير البرمجيات وحلول الويب المتكاملة، نقدم
+                                خدماتنا للشركات والأفراد الذين يسعون لتحويل أفكارهم إلى مشاريع رقمية احترافية. نعتمد على
+                                أحدث التقنيات في تطوير مواقع الإنترنت، تطبيقات الويب، وتطبيقات الهواتف الذكية، مع تقديم
+                                خدمات الاستضافة والدعم الفني بأعلى جودة.
+                                هدفنا هو بناء أنظمة ذكية، مرنة، وآمنة تساعد عملاءنا على النمو وتحقيق النجاح في عالم
+                                رقمي سريع التطور </h5>
+                            <div class="row justify-content-center align-items-start mt-5">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="div-content-num">
+                                        <div class="div-num cont" title="number" data-target="300">
+                                            0
+                                        </div>
+                                        <p>
+                                            عدد المشاريع المنجزة
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="div-content-num">
+                                        <div class="div-num cont" title="number" data-target="150">
+                                            0
+                                        </div>
+                                        <p>
+                                            عدد العملاء
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="div-content-num">
+                                        <div class="div-num cont" title="number" data-target="170">
+                                            0
+                                        </div>
+                                        <p>
+                                            المشتركين
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="div-content-num">
+                                        <div class="div-num cont" title="number" data-target="4">
+                                            0
+                                        </div>
+                                        <p>
+                                            سنوات الخبراء </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12  mt-3">
+                    <div class="div-img">
+                        <img src="img/portfolio-1.jpg" alt="img" width="100%" height="350px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- start service -->
     <section class="services py-5 position-relative" id="services">
         <div class="container position-relative">
             <div class="head-section w-100 text-center">
@@ -757,10 +837,10 @@
                 <h3 class="fw-bold position-relative fade-in">
                     اعمالنا الاحترافية
                 </h3>
-                
+
             </div>
-              <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
 
             <div class="row justify-content-center align-items-center mt-5">
                 <div class="swiper portfolio-swiper">
@@ -852,77 +932,7 @@
         </div>
     </section>
     <!-- end section 1 services -->
-    <!-- start section 2 about -->
-    <section class="section-2 py-5" id="about-us">
-        <div class="container  position-relative">
-            <div class="head-section w-100 text-end">
-                <h3 class="fw-bold main-color position-relative">
-                    من نحن – The Nine </h3>
-            </div>
-            <div class="row justify-content-center align-items-center mt-5">
-                <div class="col-md-6 col-sm-12 mt-3">
-                    <div class="div-content">
-                        <div class="div-text">
-                            <h5>
-                                نحن في The Nine شركة متخصصة في تصميم وتطوير البرمجيات وحلول الويب المتكاملة، نقدم
-                                خدماتنا للشركات والأفراد الذين يسعون لتحويل أفكارهم إلى مشاريع رقمية احترافية. نعتمد على
-                                أحدث التقنيات في تطوير مواقع الإنترنت، تطبيقات الويب، وتطبيقات الهواتف الذكية، مع تقديم
-                                خدمات الاستضافة والدعم الفني بأعلى جودة.
-                                هدفنا هو بناء أنظمة ذكية، مرنة، وآمنة تساعد عملاءنا على النمو وتحقيق النجاح في عالم
-                                رقمي سريع التطور </h5>
-                            <div class="row justify-content-center align-items-start mt-5">
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="div-content-num">
-                                        <div class="div-num cont" title="number" data-target="300">
-                                            0
-                                        </div>
-                                        <p>
-                                            عدد المشاريع المنجزة
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="div-content-num">
-                                        <div class="div-num cont" title="number" data-target="150">
-                                            0
-                                        </div>
-                                        <p>
-                                            عدد العملاء
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="div-content-num">
-                                        <div class="div-num cont" title="number" data-target="170">
-                                            0
-                                        </div>
-                                        <p>
-                                            المشتركين
-                                        </p>
-                                    </div>
-                                </div>
 
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="div-content-num">
-                                        <div class="div-num cont" title="number" data-target="4">
-                                            0
-                                        </div>
-                                        <p>
-                                            سنوات الخبراء </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12  mt-3">
-                    <div class="div-img">
-                        <img src="img/portfolio-1.jpg" alt="img" width="100%" height="350px">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!--section 3  -->
     <section class="section-3 py-5 position-relative">
         <div class="div-content text-center w-75  mx-auto py-5">
